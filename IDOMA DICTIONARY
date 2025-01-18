@@ -1,0 +1,50 @@
+print("welcome to Idoma language dictionary, written by sule saada omega")
+Idoma_dict= {
+
+    "HELLO": "ABOLE",
+    "COME": "WA",
+    "GO": "NYO",
+    "FATHER": "ADA",
+    "MOTHER": "ENE",
+    "WATER": "ENKPO",
+    "GOOD BYE": "IGBIYAJE",
+    "THANK YOU": "ANYA",
+    "FOOD": "OJIRE",
+    "LOVE": "IHOTU",
+    "NECK": "OKO",
+    "BROTHER/SISTER": "OINE",
+    "CLAN": "IPONU",
+    "GOD": "OWOICHO",
+    "HEAVEN": "OKPANCHO",
+    "RAIN": "OWO",
+    "SUN": "ENO",
+    "SLEEP": "IYOLA",
+    "EYE": "EYI",
+    "HAND": "ABO"
+}
+lookup_dict= {key.lower():value for key, value in Idoma_dict.items()}
+
+def translate (word):
+    word = word.lower()
+    if word in lookup_dict:
+
+        return lookup_dict[word]
+    else:
+        return"word not found",
+
+def main():
+    while True:
+        word = input("Enter an English word to translate to Idoma:")
+
+        if word.lower()== 'exit':
+
+            print("Exiting the program ...")
+
+            break
+
+        translation= translate(word)
+
+        print(f" the Idoma translation of:{word} is: {translation}")
+
+if __name__ == "__main__" :
+    main()
