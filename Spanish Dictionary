@@ -1,0 +1,62 @@
+import tkinter as tk
+from tkinter import ttk
+
+spanish_dict = {
+    'arm': {'translation': 'brazo', 'definition': 'The upper limb of the human body, connecting the shoulder to the hand.'},
+    'can': {'translation': 'puede/lata', 'definition': 'A container for holding liquids or gases, typically made of metal or plastic.'},
+    'excuse': {'translation': 'disculpa(usted)/lo siento(tu)', 'definition': 'A polite expression of regret or apology for a mistake or wrongdoing.'},
+    'female': {'translation': 'mujer', 'definition': 'An adult human being who is biologically and socially characterized as a woman.'},
+    'food': {'translation': 'alimento', 'definition': 'Any nutritious substance that people or animals eat, drink, or otherwise absorb, in order to maintain life and growth.'},
+    'formal': {'translation': 'usted', 'definition': 'A polite and respectful way of speaking or writing, especially when addressing someone you do not know well.'},
+    'group': {'translation': 'grupo', 'definition': 'A number of people or things that are together or associated for a particular purpose.'},
+    'happy': {'translation': 'feliz', 'definition': 'Feeling or showing pleasure or contentment.'},
+    'head': {'translation': 'cabeza', 'definition': 'The upper part of the human body, containing the brain, eyes, nose, mouth, and ears.'},
+    'help': {'translation': 'ayuda', 'definition': 'Assistance or support given to someone, especially in a difficult or emergency situation.'},
+    'informal': {'translation': 'tu', 'definition': 'A friendly and casual way of speaking or writing, especially when addressing someone you know well.'},
+    'leg': {'translation': 'pierna', 'definition': 'The lower limb of the human body, extending from the hip to the foot.'},
+    'male': {'translation': 'hombre', 'definition': 'An adult human being who is biologically and socially characterized as a man.'},
+    'protect': {'translation': 'proteger', 'definition': 'To keep someone or something safe from harm, injury, or danger.'},
+    'sad': {'translation': 'triste', 'definition': 'Feeling unhappy or sorrowful.'},
+    'seal': {'translation': 'sello', 'definition': 'A device or substance used to close or secure something, such as an envelope or a container.'},
+    'step': {'translation': 'paso', 'definition': 'A movement made by lifting one foot and putting it down in a different place.'},
+    'stomach': {'translation': 'estomago', 'definition': 'The part of the body where food is digested, located between the esophagus and the small intestine.'},
+    'thank you': {'translation': 'gracias', 'definition': 'A polite expression of gratitude or appreciation.'},
+    'welcome': {'translation': 'bienvenido(hombre)/bienvenida(mujer)', 'definition': 'A polite expression of greeting or reception, especially to someone who has just arrived.'}
+}
+
+def search_word():
+    word = entry_text.get().lower()
+    if word in spanish_dict:
+        result.set(f"{spanish_dict[word]['translation']}\n\n{spanish_dict[word]['definition']}")
+    else:
+        result.set('Not found')
+
+window = tk.Tk()
+window.title("Spanish Dictionary")
+window.geometry('800x600')
+
+notebook = ttk.Notebook(window)
+notebook.pack(pady=10, expand=True)
+
+frame1 = tk.Frame(notebook)
+frame2 = tk.Frame(notebook)
+notebook.add(frame1, text='Dictionary')
+notebook.add(frame2, text='Search')
+
+dict_listbox = tk.Listbox(frame1, font=('Arial', 16), width=50)
+dict_listbox.pack(padx=20, pady=20)
+for key, value in spanish_dict.items():
+    dict_listbox.insert(tk.END, f"{key}: {value['translation']}")
+
+entry_text = tk.StringVar()
+entry_field = tk.Entry(frame2, textvariable=entry_text, font=('Arial', 16), width=50)
+entry_field.pack(padx=20, pady=10)
+
+search_btn = tk.Button(frame2, text='Search', command=search_word, font=('Arial', 14))
+search_btn.pack(pady=10)
+
+result = tk.StringVar()
+result_label = tk.Label(frame2, textvariable=result, font=('Arial', 16), wraplength=400, justify=tk.LEFT)
+result_label.pack(padx=20, pady=10)
+
+window.mainloop()
