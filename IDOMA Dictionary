@@ -1,0 +1,59 @@
+
+from tkinter import Tk, Entry, Button, Label, StringVar
+window = Tk()
+window.geometry("500x300")
+window.title("Idoma Dictionary")
+entry_txt = Entry(window)
+entry_txt.pack()
+result = StringVar()
+result_label = Label(window, textvariable=result)
+result_label.pack()
+Idoma_dict= {
+    "HELLO": "ABOLE",
+    "COME": "WA",
+    "GO": "NYO",
+    "FATHER": "ADA",
+    "MOTHER": "ENE",
+    "WATER": "ENKPO",
+    "GOOD BYE": "IGBIYAJE",
+    "THANK YOU": "ANYA",
+    "FOOD": "OJIRE",
+    "LOVE": "IHOTU",
+    "NECK": "OKO",
+    "BROTHER/SISTER": "OINE",
+    "CLAN": "IPONU",
+    "GOD": "OWOICHO",
+    "HEAVEN": "OKPANCHO",
+    "RAIN": "OWO",
+    "SUN": "ENO",
+    "SLEEP": "IYOLA",
+    "EYE": "EYI",
+    "HAND": "ABO"
+}
+def search(word):
+    if word in Idoma_dict:
+        result.set(Idoma_dict[word])
+        print(Idoma_dict[word])
+    else:
+        result.set("NOT FOUND")
+        print("NOT FOUND")
+search_btn = Button(window, text= "Translate", command= lambda: search(entry_txt.get()))
+search_btn.pack()
+window.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
