@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+        }
+        .calculator {
+            width: 300px;
+            background: black;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .display {
+            width: 100%;
+            height: 60px;
+            margin-bottom: 12px;
+            padding: 10px;
+            text-align: right;
+            font-size: 2em;
+            font-weight: bold;
+            color: #fff;
+            background: #222;
+            border: none;
+            border-radius: 10px;
+            outline: none;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            width: 100%;
+            height: 50px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .dark-button { background: #333; color: white; }
+        .gray-button { background: gray; color: black; }
+        .orange-button { background: orange; color: white; }
+        .wide-button { grid-column: span 2; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="display" id="display" disabled>
+        <div class="buttons">
+            <button class="gray-button" onclick="clearDisplay()">AC</button>
+            <button class="gray-button" onclick="appendValue('%')">%</button>
+            <button class="gray-button" onclick="appendValue('/')">÷</button>
+            <button class="orange-button" onclick="appendValue('*')">×</button>
+            <button class="dark-button" onclick="appendValue('7')">7</button>
+            <button class="dark-button" onclick="appendValue('8')">8</button>
+            <button class="dark-button" onclick="appendValue('9')">9</button>
+            <button class="orange-button" onclick="appendValue('-')">−</button>
+            <button class="dark-button" onclick="appendValue('4')">4</button>
+            <button class="dark-button" onclick="appendValue('5')">5</button>
+            <button class="dark-button" onclick="appendValue('6')">6</button>
+            <button class="orange-button" onclick="appendValue('+')">+</button>
+            <button class="dark-button" onclick="appendValue('1')">1</button>
+            <button class="dark-button" onclick="appendValue('2')">2</button>
+            <button class="dark-button" onclick="appendValue('3')">3</button>
+            <button class="orange-button" onclick="calculate()">=</button>
+            <button class="dark-button" onclick="appendValue('0')">0</button>
+            <button class="dark-button" onclick="appendValue('.')">.</button>
+            
+            <!-- Physics & Finance Calculation Buttons -->
+            <button class="wide-button dark-button" onclick="calculateSpeed()">Speed</button>
+            <button class="wide-button dark-button" onclick="calculateAvgTime()">Avg Time</button>
+            <button class="wide-button dark-button" onclick="calculateMass()">Mass</button>
+            <button class="wide-button dark-button" onclick="calculateWork()">Work</button>
+            <button class="wide-button dark-button" onclick="calculateSI()">Simple Interest</button>
+        </div>
+    </div>
+    <script>
+        function appendValue(value) {
+            document.getElementById("display").value += value;
+        }
+        
+        function clearDisplay() {
+            document.getElementById("display").value = "";
+        }
+    
+        function calculate() {
+            try {
+                document.getElementById("display").value = eval(document.getElementById("display").value);
+            } catch {
+                document.getElementById("display").value = "Error";
+            }
+        }
+    
+        // Physics & Finance Calculations
+        function calculateSpeed() {
+            let distance = parseFloat(prompt("Enter distance (m):"));
+            let time = parseFloat(prompt("Enter time (s):"));
+            document.getElementById("display").value = distance / time + " m/s";
+        }
+    
+        function calculateAvgTime() {
+            let initialTime = parseFloat(prompt("Enter initial time (s):"));
+            let finalTime = parseFloat(prompt("Enter final time (s):"));
+            let constant = parseFloat(prompt("Enter constant:"));
+            document.getElementById("display").value = (initialTime + finalTime) / constant + " sec";
+        }
+    
+        function calculateMass() {
+            let force = parseFloat(prompt("Enter force (N):"));
+            let acceleration = parseFloat(prompt("Enter acceleration (m/s²):"));
+            document.getElementById("display").value = force / acceleration + " kg";
+        }
+    
+        function calculateWork() {
+            let force = parseFloat(prompt("Enter force (N):"));
+            let distance = parseFloat(prompt("Enter distance (m):"));
+            document.getElementById("display").value = force * distance + " Joules";
+        }
+    
+        function calculateSI() {
+            let principal = parseFloat(prompt("Enter principal amount:"));
+            let rate = parseFloat(prompt("Enter rate of interest (%):"));
+            let time = parseFloat(prompt("Enter time (years):"));
+            document.getElementById("display").value = (principal * rate * time) / 100 + " $";
+        }
+    </script>
+</body>
+</html>
